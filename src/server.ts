@@ -33,11 +33,11 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   
   // Root Endpoint
   // Displays a simple message to the user
-  app.get("/filteredimage", async ( req : Request, res : Response ) => {
-    let url = req.query.image_url;
+  app.get("/filteredimage", async ( req, res ) => {
+    let  url  = req.query.image_url;
 
     if (!url) {
-      return res.status(400).send("Image url is required");
+      return res.status(400).send("Please pass the Image url");
     }
 
     const filePath = await filterImageFromURL(url);
@@ -48,37 +48,10 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
     // Root Endpoint
   // Displays a simple message to the user
-  app.get( "/", async ( req : Request, res : Response ) => {
+  app.get( "/", async ( req , res ) => {
     res.send("try GET /filteredimage?image_url={{}}")
   } );
-  
-// app.get( "/filteredimage/", async ( req, res ) => {
-//   let { data } = req.query;
-//   var myfun = async function (data: string, callback: { (files: string[]): Promise<void>; (arg0: string[]): void; }) {
-//     try {
-//       var filteredpath = await filterImageFromURL(data);
-//       callback([filteredpath]);
-//     } catch(err) {
-//       console.error(err);
-//     }
-//   };
 
-//   try {
-//     var re = req.query.image_url;
-
-//     if (!re) {
-//       return res.status(400).send(`Img URL is required`);
-//     }
-
-//     await myfun(re, deleteLocalFiles);
-
-//     // let filteredpath = filterImageFromURL(re);
-//     // res.sendFile(filteredpath);
-//     // deleteLocalFiles([filteredpath]);
-//   } catch(err) {
-//     console.error(err);
-//   }
-// });
   // Start the Server
   app.listen( port, () => {
       console.log( `server running http://localhost:${ port }` );
